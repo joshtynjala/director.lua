@@ -2,7 +2,7 @@ h1. Director Class
 
 This is a fork of the "Director class":http://developer.anscamobile.com/forums/director-class created by "Ricardo Rauber":http://twitter.com/rauberlabs for Ansca's Corona SDK. It includes useful extensions developed by "Josh Tynjala":http://twitter.com/joshtynjala. This fork is currently based on version 1.2.
 
-h2. addParamsForModule()
+h2. Dependency injection with @addParamsForModule()@
 
 The @addParamsForModule()@ function allows the Director class to pass a parameters object to a module's @new()@ function when changing scenes. Rather than polluting the global namespace, you can use this function to inject data into screens when Director displays them.
 
