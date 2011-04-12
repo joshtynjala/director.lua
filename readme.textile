@@ -27,3 +27,31 @@ function new(params)
 
 	return localGroup
 end
+
+h2. Custom Effects
+
+This version of Director includes support for custom effects. Rather than being limited to "moveFromRight", "fade", "flip", or any of the other effects built into Director, you can pass in your own effect implementations.
+
+bc.. module(..., package.seeall)
+
+function new(params)
+	local currView = params.currView
+	local nextView = params.nextView
+	local time = params.time
+	
+	nextView.x = display.contentWidth
+	nextView.y = 0
+	
+	transition.to ( currView, { x=display.contentWidth*-1, time=time } )
+	
+	transition.to( nextView, { x=0, time=time } )
+end
+
+p. The code above is a reimplementation of the @"moveFromRight"@ effect. Custom effects receive three parameters when @new()@ is called: @currView@, @nextView@, and @time@.
+
+Using a custom effect is not much different than using a built-in effect. Instead of passing in a string, you should pass in a reference to the module.
+
+bc.. local CustomMoveFromRight = require("CustomMoveFromRight")
+director:changeScene("settings", CustomMoveFromRight)
+
+p. The code above demonstrates how to use the custom implementation of @"moveFromRight"@ that we created earlier.

@@ -6,6 +6,7 @@ module(..., package.seeall)
 --
 -- Contains modifications by Josh Tynjala (http://bowlerhatgames.com/)
 --  * Added director:addParamsForModule() to pass params object to new()
+--  * Added support for custom effect modules.
 --
 -- Version: 1.2
 -- Made by Ricardo Rauber Pereira @ 2010
@@ -359,10 +360,28 @@ function director:changeScene(nextLoadScene,
 	local showFx
  
 	-----------------------------------
+	-- EFFECT: Custom
+	-----------------------------------
+ 
+	if type(effect) == "table" then
+		
+		nextView.x = 0
+		nextView.y = 0
+		
+		loadScene (newScene)
+		
+		effect.new{
+			nextView = nextView,
+			currView = currView,
+			time = fxTime
+		}
+		timer.performWithDelay( fxTime+safeDelay, fxEnded )
+	
+	-----------------------------------
 	-- EFFECT: Move From Right
 	-----------------------------------
         
-	if effect == "moveFromRight" then
+	elseif effect == "moveFromRight" then
                         
 		nextView.x = display.contentWidth
 		nextView.y = 0
