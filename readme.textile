@@ -1,0 +1,14 @@
+h1. Director Class
+
+This is a fork of "Ricardo Rauber's":http://twitter.com/rauberlabs "Director class":http://developer.anscamobile.com/forums/director-class for Ansca's Corona SDK. It includes useful extensions developed by "Josh Tynjala":http://twitter.com/joshtynjala. This fork is based on version 1.2 of the Director class.
+
+h2. addParamsForModule()
+
+The @addParamsForModule()@ function allows the Director class to pass a parameters object to a module's @new()@ function when changing scenes. Rather than polluting the global namespace, you can use this function to inject data into screens when Director displays them.
+
+bc.. local settingsData = { soundsEnabled = true }
+director:addParamsForModule("settings", settingsData)
+director:addParamsForModule("game", settingsData)
+director:changeScene("settings", "moveFromLeft")
+
+p. In the code above, both the settings screen and the game itself need access to shared settings data.
