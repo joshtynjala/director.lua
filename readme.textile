@@ -1,6 +1,6 @@
 h1. Director Class
 
-This is a fork of "Ricardo Rauber's":http://twitter.com/rauberlabs "Director class":http://developer.anscamobile.com/forums/director-class for Ansca's Corona SDK. It includes useful extensions developed by "Josh Tynjala":http://twitter.com/joshtynjala. This fork is based on version 1.2 of the Director class.
+This is a fork of the "Director class":http://developer.anscamobile.com/forums/director-class created by "Ricardo Rauber":http://twitter.com/rauberlabs for Ansca's Corona SDK. It includes useful extensions developed by "Josh Tynjala":http://twitter.com/joshtynjala. This fork is currently based on version 1.2.
 
 h2. addParamsForModule()
 
@@ -11,4 +11,19 @@ director:addParamsForModule("settings", settingsData)
 director:addParamsForModule("game", settingsData)
 director:changeScene("settings", "moveFromLeft")
 
-p. In the code above, both the settings screen and the game itself need access to shared settings data.
+p. In the code above, both the settings screen and the game itself can share the same object for settings data, and they can access it without using a global variable.
+
+Using Director's scene template as a basis, here's how you might access the parameters that are passed to @new()@:
+
+bc.. module(..., package.seeall)
+local localGroup = display.newGroup()
+function new(params)
+
+	if params.soundsEnabled then
+		-- do something
+	end
+
+	------ More code here ------
+
+	return localGroup
+end
